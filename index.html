@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pomodoro App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container"">
+
+        <!-- Zakładki trybów -->
+        <div class="tabs">
+            <button class="tab active" data-mode="pomodoro">Pomodoro</button>
+            <button class="tab" data-mode="short">Short Break</button>
+            <button class="tab" data-mode="long">Long Break</button>
+        </div>
+
+        <!-- Główna sekcja: timer i lista zadań -->
+        <div class="main">
+            <div class="timer-section">
+                <div class="timer" id="timer">25:00</div>
+                <div class="controls">
+                    <button id="startBtn">START</button>
+                    <button id="pauseBtn">PAUSE</button>
+                    <button id="resetBtn">RESET</button>
+                </div>
+                <div class="sessions">Completed Sessions: <span id="sessionCount">0</span></div>
+            </div>
+
+            <div class="tasks-section">
+                <h2>Tasks</h2>
+                <div class="task-list-container">
+                    <ul id="taskList"></ul>
+                </div>
+                <div class="input-container">
+                    <input type="text" id="taskInput" placeholder="New task">
+                    <button id="addTaskBtn">Add Task</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

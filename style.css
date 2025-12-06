@@ -1,0 +1,207 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #fff5f5;
+    margin: 0;
+    padding: 50px;          
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    
+    
+    /*tło*/
+    background-image: url("cozy_girl.jpg");
+    background-size: cover;
+    background-position: fill;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.3);   /* zmień intensywność tła */
+    pointer-events: none;           /* żeby nie blokować kliknięć */
+  
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    padding-left: 10vh;
+    transform: scale(1.4);
+    transform-origin: top center;
+    
+}
+
+/* Zakładki */
+.tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    width: 100%;
+}
+.tab {
+    background-color: #C05050;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 5px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+.tab.active {
+    background-color: #9B3030;
+}
+
+/* Główna sekcja */
+.main {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* Timer */
+.timer-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-height: 500px; 
+    overflow-y: auto;
+}
+.timer {
+    font-size: 80px;
+    font-weight: bold;
+    color: #C05050;
+    margin-bottom: 20px;
+}
+.controls button {
+    background-color: #C05050;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+.controls button:hover {
+    background-color: #9B3030;
+}
+.sessions {
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+/* Tasks Section */
+.tasks-section {
+width: 300px;
+background-color: #ffe5e5;
+padding: 15px;
+border-radius: 10px;
+box-sizing: border-box;
+
+display: flex;
+flex-direction: column;
+max-height: 340px;       /* ograniczenie wysokości sekcji */
+
+}
+
+.tasks-section h2 {
+text-align: center;
+color: #C05050;
+margin-top: 0;
+flex-shrink: 0; /* tytuł nie kurczy się */
+}
+
+.task-list-container {
+flex-grow: 1; 
+overflow-y: auto;
+padding-right: 5px; /*odstęp od scrollbara*/
+margin-bottom: 10px;
+}
+
+.tasks-section ul {
+list-style: none;
+padding: 0;
+margin: 0;
+}
+
+.tasks-section li {
+display: flex;
+align-items: center;
+justify-content: space-between;
+margin-bottom: 8px;
+background-color: white;
+padding: 5px 10px;
+border-radius: 5px;
+gap: 10px;
+}
+
+.tasks-section li input[type="checkbox"] {
+flex-shrink: 0;
+}
+
+.tasks-section li span {
+flex-grow: 1;
+margin-left: 5px;
+word-break: break-word;
+}
+
+.tasks-section li button {
+flex-shrink: 0;
+background-color: #C05050;
+color: white;
+border: none;
+border-radius: 5px;
+padding: 5px 10px;
+cursor: pointer;
+transition: background 0.3s;
+}
+
+.tasks-section li button {
+background-color: #9B3030;
+}
+
+.input-container {
+display: flex;
+gap: 5px;
+flex-shrink: 0; /* input i przycisk nie kurczą się */
+}
+
+.tasks-section input[type="text"] {
+flex-grow: 1; /* zajmuje całą dostępną szerokość oprócz przycisku */
+padding: 5px;
+border-radius: 5px;
+border: 1px solid #ccc;
+box-sizing: border-box;
+}
+
+.tasks-section #addTaskBtn {
+width: 80px;
+background-color: #C05050;
+color: white;
+border: none;
+border-radius: 5px;
+padding: 5px 0;
+cursor: pointer;
+transition: background 0.3s;
+}
+
+.tasks-section #addTaskBtn {
+background-color: #9B3030;
+}
+
+.tasks-section li.completed {
+background-color: #4CAF50;
+color: white; 
+}
+
+.tasks-section li.completed input[type="checkbox"] {
+accent-color: white; /* biały ptaszek w checkboxie */
+}
