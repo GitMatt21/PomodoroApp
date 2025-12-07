@@ -197,7 +197,7 @@ transition: background 0.3s;
 background-color: #9B3030;
 }
 
-.tasks-section li.completed {
+.tasks-section li.time-completed {
 background-color: #abf7ac;
 color: white; 
 }
