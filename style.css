@@ -96,6 +96,7 @@ body::before {
 .sessions {
     margin-top: 20px;
     font-size: 18px;
+    color: white;
 }
 
 /* Tasks Section */
@@ -155,14 +156,19 @@ word-break: break-word;
 
 .tasks-section li button {
 flex-shrink: 0;
-background-color: #C05050;
 color: white;
 border: none;
 border-radius: 5px;
-padding: 5px 10px;
+padding: 4px 8px;
 cursor: pointer;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 14px;
 transition: background 0.3s;
 }
+
+.tasks-section li button:hover { background-color: #9B3030; }
 
 .tasks-section li button {
 background-color: #9B3030;
@@ -198,10 +204,43 @@ background-color: #9B3030;
 }
 
 .tasks-section li.time-completed {
-background-color: #abf7ac;
+background-color: #a4f4a6;
 color: white; 
 }
 
 .tasks-section li.completed input[type="checkbox"] {
 accent-color: white; /* biały ptaszek w checkboxie */
+}
+
+/* Kontener pola edycji pod zadaniem */
+.edit-container {
+display: flex;
+gap: 5px;
+margin-bottom: 5px;
+position: relative;
+}
+
+.edit-input {
+flex-grow: 1;
+padding: 5px;
+border-radius: 5px;
+border: 1px solid #ccc;
+box-sizing: border-box;
+}
+
+.save-btn {
+position: absolute;
+right: 5px;
+top: 5px;
+font-size: 12px;
+background-color: #4CAF50;
+color: white;
+border: none;
+border-radius: 3px;
+padding: 2px 6px;
+cursor: pointer;
+}
+
+.save-btn {
+background-color: #45a049;
 }
