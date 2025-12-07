@@ -33,20 +33,32 @@ function updateTimer() {
 
 // Timer functions
 function startTimer() {
-    if(timer) return;
-    timer = setInterval(()=>{
-        remainingSeconds--;
-        updateTimer();
-        if(remainingSeconds <= 0){
-            clearInterval(timer);
-            timer = null;
-            completedSessions++;
-            sessionCountEl.textContent = completedSessions;
-            alert('Session completed!');
-            remainingSeconds = totalSeconds;
-            updateTimer();
+if(timer) return;
+timer = setInterval(()=>{
+remainingSeconds--;
+updateTimer();
+
+    if(remainingSeconds <= 0){
+        clearInterval(timer);
+        timer = null;
+        completedSessions++;
+        sessionCountEl.textContent = completedSessions;
+        alert('Session completed!');
+
+        // Dodanie klasy time-completed tylko jeśli aktualny tryb to pomodoro
+        if(currentMode === 'pomodoro'){
+            const firstPendingTask = Array.from(taskList.children).find(li => 
+                !li.classList.contains('time-completed')
+            );
+            if(firstPendingTask){
+                firstPendingTask.classList.add('time-completed');
+            }
         }
-    },1000);
+
+        remainingSeconds = totalSeconds;
+        updateTimer();
+    }
+},1000);
 }
 function pauseTimer() {
     if(timer){
@@ -93,28 +105,13 @@ function loadTasks() {
     });
 }
 
-function addTask(name, completed=false){
+function addTask(name){
 const li = document.createElement('li');
 li.dataset.name = name;
 
 const checkbox = document.createElement('input');
 checkbox.type = 'checkbox';
-checkbox.checked = completed;
-
-// Ustawienie klasy completed jeśli zadanie jest już wykonane
-if(checkbox.checked) {
-    li.classList.add('completed');
-}
-
-// Event listener zmieniający klasę completed przy kliknięciu
-checkbox.addEventListener('change', ()=>{
-    if(checkbox.checked){
-        li.classList.add('completed');
-    } else {
-        li.classList.remove('completed');
-    }
-    saveTasks();
-});
+checkbox.addEventListener('change', saveTasks); // tylko ptaszek, nie kolor
 
 const span = document.createElement('span');
 span.textContent = name;
