@@ -12,7 +12,7 @@ const taskList = document.getElementById('taskList');
 
 // Timer variables
 let timer = null;
-let totalSeconds = 25 * 60;
+let totalSeconds = 25* 60;
 let remainingSeconds = totalSeconds;
 let completedSessions = 0;
 
@@ -46,19 +46,20 @@ updateTimer();
         alert('Session completed!');
 
         // Dodanie klasy time-completed tylko jeśli aktualny tryb to pomodoro
-        if(currentMode === 'pomodoro'){
-            const firstPendingTask = Array.from(taskList.children).find(li => 
-                !li.classList.contains('time-completed')
-            );
-            if(firstPendingTask){
-                firstPendingTask.classList.add('time-completed');
+         if(currentMode === 'pomodoro'){
+                Array.from(taskList.children).forEach(li => {
+                    const checkbox = li.querySelector('input[type="checkbox"]');
+                    if(checkbox && checkbox.checked && !li.classList.contains('time-completed')){
+                        li.classList.add('time-completed');
+                    }
+                });
             }
-        }
 
-        remainingSeconds = totalSeconds;
-        updateTimer();
-    }
-},1000);
+            remainingSeconds = totalSeconds;
+            updateTimer();
+            pauseBtn.textContent = 'PAUSE'; // przywraca przycisk do domyślnego stanu
+        }
+    },1000);
 }
 function pauseTimer() {
     if(timer){
@@ -74,7 +75,16 @@ function resetTimer() {
 
 // Event listeners
 startBtn.addEventListener('click', startTimer);
-pauseBtn.addEventListener('click', pauseTimer);
+pauseBtn.addEventListener('click', () => {
+    if(timer){
+        clearInterval(timer);
+        timer = null;
+        pauseBtn.textContent = 'RESUME';
+    } else {
+        startTimer();
+        pauseBtn.textContent = 'PAUSE';
+    }
+});
 resetBtn.addEventListener('click', resetTimer);
 
 // Tabs
@@ -109,15 +119,60 @@ function addTask(name){
 const li = document.createElement('li');
 li.dataset.name = name;
 
+// Checkbox
 const checkbox = document.createElement('input');
 checkbox.type = 'checkbox';
-checkbox.addEventListener('change', saveTasks); // tylko ptaszek, nie kolor
+checkbox.addEventListener('change', saveTasks);
 
+// Tekst zadania
 const span = document.createElement('span');
 span.textContent = name;
 
+// EDIT button
+const editBtn = document.createElement('button');
+editBtn.classList.add('edit-btn');
+editBtn.title = "Edit task";
+editBtn.innerHTML = '<i class="fa-solid fa-edit"></i>';
+
+editBtn.addEventListener('click', () => {
+    // Jeśli już istnieje pole edycji, nie dodawaj kolejnego
+    if(taskList.querySelector('.edit-container')) return;
+
+    const editContainer = document.createElement('div');
+    editContainer.classList.add('edit-container');
+
+    const editInput = document.createElement('input');
+    editInput.type = 'text';
+    editInput.value = li.dataset.name;
+    editInput.classList.add('edit-input');
+
+    const saveBtn = document.createElement('button');
+    saveBtn.classList.add('save-btn');
+    saveBtn.textContent = 'Save';
+    saveBtn.addEventListener('click', () => {
+        const newName = editInput.value.trim();
+        if(newName !== ''){
+            li.dataset.name = newName;
+            span.textContent = newName;
+            saveTasks();
+            editContainer.remove();
+        }
+    });
+
+    editContainer.appendChild(editInput);
+    editContainer.appendChild(saveBtn);
+
+    // Dodajemy nad li (przed nim w DOM)
+    taskList.insertBefore(editContainer, li);
+
+    editInput.focus();
+});
+
+// REMOVE button
 const removeBtn = document.createElement('button');
-removeBtn.textContent = 'Remove';
+removeBtn.classList.add('remove-btn');
+removeBtn.title = "Remove task";
+removeBtn.innerHTML = '<i class="fa-solid fa-trash"></i>';
 removeBtn.addEventListener('click', ()=>{
     li.remove();
     saveTasks();
@@ -125,9 +180,12 @@ removeBtn.addEventListener('click', ()=>{
 
 li.appendChild(checkbox);
 li.appendChild(span);
+li.appendChild(editBtn);
 li.appendChild(removeBtn);
+
 taskList.appendChild(li);
 saveTasks();
+
 }
 
 addTaskBtn.addEventListener('click', ()=>{
