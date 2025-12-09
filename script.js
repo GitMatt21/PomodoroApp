@@ -12,7 +12,7 @@ const taskList = document.getElementById('taskList');
 
 // Timer variables
 let timer = null;
-let totalSeconds = 25*60;
+let totalSeconds = 0.1*60;
 let remainingSeconds = totalSeconds;
 let completedSessions = 0;
 
