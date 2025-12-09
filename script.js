@@ -18,7 +18,7 @@ let completedSessions = 0;
 
 // Modes
 const modes = {
-    pomodoro: 25*60,
+    pomodoro: 0.1*60,
     short: 5*60,
     long: 15*60
 };
