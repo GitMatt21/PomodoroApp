@@ -12,13 +12,13 @@ const taskList = document.getElementById('taskList');
 
 // Timer variables
 let timer = null;
-let totalSeconds = 25*60;
+let totalSeconds = 0.1*60;
 let remainingSeconds = totalSeconds;
 let completedSessions = 0;
 
 // Modes
 const modes = {
-    pomodoro: 0.1*60,
+    pomodoro: 25*60,
     short: 5*60,
     long: 15*60
 };
