@@ -248,7 +248,7 @@ background-color: #45a049;
 .mini-footer {
     position: fixed;
     right: 10px;
-    bottom: 10px;
+    top: 10px;
     font-size: 10px;
     color: white;
     opacity: 0.6;
